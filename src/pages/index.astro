@@ -1,0 +1,114 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GuideCard from '../components/GuideCard.astro';
+import Newsletter from '../components/Newsletter.astro';
+import PromptSwitcher from '../components/PromptSwitcher.astro';
+import { siteConfig } from '../config/site';
+import { prompts } from '../data/prompts';
+
+const guides = (await getCollection('guides')).sort(
+  (a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf(),
+);
+const featured = guides.filter((g) => g.data.featured).slice(0, 4);
+---
+
+<BaseLayout>
+  <section class="hero-bg relative overflow-hidden border-b border-line">
+    <div class="container-page grid items-center gap-10 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
+      <div>
+        <p class="inline-flex items-center rounded-full border border-line bg-card px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-ink-muted">
+          For business owners & office teams
+        </p>
+        <h1 class="page-title mt-5 max-w-2xl !text-5xl leading-[1.05] sm:!text-6xl">
+          Put AI to work in your office, <span class="text-accent">starting Monday</span>
+        </h1>
+        <p class="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
+          Step-by-step playbooks and copy-ready prompts for Claude, Grok Bot, and ChatGPT. Written for owners and office teams, with safe-use notes on every guide.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/guides" class="btn-primary !px-6 !py-3 !text-base">Start with a guide →</a>
+          <a href="/prompts" class="btn-secondary !px-6 !py-3 !text-base">Open prompt library</a>
+        </div>
+        <dl class="mt-10 grid max-w-xl grid-cols-3 gap-4 text-center sm:text-left">
+          <div class="rounded-2xl border border-line bg-card/80 p-4">
+            <dt class="text-xs uppercase tracking-wide text-ink-muted">Guides</dt>
+            <dd class="mt-1 text-2xl font-semibold text-ink">{guides.length}</dd>
+          </div>
+          <div class="rounded-2xl border border-line bg-card/80 p-4">
+            <dt class="text-xs uppercase tracking-wide text-ink-muted">Prompts</dt>
+            <dd class="mt-1 text-2xl font-semibold text-ink">{prompts.length}</dd>
+          </div>
+          <div class="rounded-2xl border border-line bg-card/80 p-4">
+            <dt class="text-xs uppercase tracking-wide text-ink-muted">Tools</dt>
+            <dd class="mt-1 text-2xl font-semibold text-ink">3</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="card p-6 sm:p-8">
+        <p class="text-sm font-semibold text-ink">What you’ll find here</p>
+        <ul class="mt-4 space-y-4 text-sm leading-relaxed text-ink-muted">
+          <li><strong class="text-ink">Step-by-step playbooks</strong> for SOPs, contracts, inbox triage, meetings, and proposals.</li>
+          <li><strong class="text-ink">Copyable prompts</strong> with fill-in-the-blank placeholders your team can adapt in minutes.</li>
+          <li><strong class="text-ink">Safe-use notes</strong> on every guide so client and company data stay protected.</li>
+        </ul>
+        <a href="/tools" class="btn-secondary mt-6 w-full">Compare Claude vs Grok Bot vs ChatGPT</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page py-20">
+    <div class="flex items-end justify-between gap-4">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Start by tool</p>
+        <h2 class="font-display mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Pick the AI that fits the job</h2>
+      </div>
+      <a href="/tools" class="hidden text-sm font-semibold no-underline sm:inline">Full comparison →</a>
+    </div>
+    <div class="mt-8 grid gap-5 md:grid-cols-3">
+      {
+        siteConfig.tools.map((tool) => (
+          <a href={tool.href} class="card hover-card group relative block overflow-hidden p-6 no-underline">
+            <span class:list={['absolute inset-x-0 top-0 h-1', tool.accent === 'claude' && 'tool-bar-claude', tool.accent === 'grok' && 'tool-bar-grok', tool.accent === 'chatgpt' && 'tool-bar-chatgpt']}></span>
+            <span
+              class:list={[
+                'inline-flex rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide',
+                tool.accent === 'claude' && 'tool-claude',
+                tool.accent === 'grok' && 'tool-grok',
+                tool.accent === 'chatgpt' && 'tool-chatgpt',
+              ]}
+            >
+              {tool.name}
+            </span>
+            <h3 class="mt-4 text-xl font-semibold text-ink group-hover:text-accent">{tool.name}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-muted">{tool.summary}</p>
+            <p class="mt-5 text-sm font-semibold text-accent">Browse {tool.short} guides →</p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-paper-2/60 py-20">
+    <div class="container-page">
+      <div class="flex items-end justify-between gap-4">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Featured playbooks</p>
+          <h2 class="font-display mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Start with these Monday-morning workflows</h2>
+        </div>
+        <a href="/guides" class="hidden text-sm font-semibold no-underline sm:inline">All guides →</a>
+      </div>
+      <div class="mt-8 grid gap-5 md:grid-cols-2">
+        {featured.map((guide) => <GuideCard guide={guide} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page py-16">
+    <PromptSwitcher />
+  </section>
+
+  <section class="container-page pb-20">
+    <Newsletter />
+  </section>
+</BaseLayout>

@@ -1,0 +1,93 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import ToolBadge from '../../components/ToolBadge.astro';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map((guide) => ({
+    params: { slug: guide.id },
+    props: { guide },
+  }));
+}
+
+const { guide } = Astro.props;
+const { Content, headings } = await render(guide);
+const allGuides = await getCollection('guides');
+const related = allGuides
+  .filter(
+    (item) =>
+      item.id !== guide.id &&
+      (item.data.tool === guide.data.tool || item.data.department === guide.data.department),
+  )
+  .sort((a, b) => Number(b.data.tool === guide.data.tool) - Number(a.data.tool === guide.data.tool))
+  .slice(0, 3);
+
+const toc = headings.filter((h) => h.depth === 2);
+const published = guide.data.publishedDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'America/Los_Angeles',
+});
+---
+
+<BaseLayout title={guide.data.title} description={guide.data.summary} ogType="article" canonicalPath={`/guides/${guide.id}`}>
+  <article>
+    <header class="hero-bg border-b border-line">
+      <div class="container-page py-12">
+        <a href="/guides" class="text-sm font-semibold text-accent no-underline">← All guides</a>
+        <div class="mt-5 flex flex-wrap items-center gap-2">
+          <ToolBadge tool={guide.data.tool} size="md" />
+          <span class="rounded-full bg-card px-3 py-1.5 text-xs font-medium uppercase tracking-wide text-ink-muted">
+            {guide.data.department}
+          </span>
+          <span class="rounded-full bg-card px-3 py-1.5 text-xs font-medium uppercase tracking-wide text-ink-muted">
+            {guide.data.difficulty}
+          </span>
+          <span class="rounded-full bg-card px-3 py-1.5 text-xs font-medium uppercase tracking-wide text-ink-muted">
+            {guide.data.timeToComplete}
+          </span>
+        </div>
+        <h1 class="font-display mt-5 max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">{guide.data.title}</h1>
+        <p class="mt-4 max-w-2xl text-lg text-ink-muted">{guide.data.summary}</p>
+        <p class="mt-4 text-sm text-ink-muted">Published {published}</p>
+      </div>
+    </header>
+
+    <div class="container-page grid gap-10 py-12 lg:grid-cols-[220px_minmax(0,1fr)]">
+      <aside class="lg:sticky lg:top-24 lg:self-start lg:border-r lg:border-line lg:pr-6">
+        <p class="text-xs font-semibold uppercase tracking-[0.14em] text-ink-muted">On this page</p>
+        <nav class="mt-3 -ml-3 space-y-1" aria-label="Table of contents">
+          {
+            toc.map((item) => (
+              <a href={`#${item.slug}`} class="block border-l-2 border-transparent py-0.5 pl-3 text-sm text-ink-muted no-underline hover:border-accent hover:text-accent">
+                {item.text}
+              </a>
+            ))
+          }
+        </nav>
+      </aside>
+
+      <div class="prose-guide max-w-[44rem]">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  {
+    related.length > 0 && (
+      <section class="border-t border-line bg-paper-2/40 py-14">
+        <div class="container-page">
+          <h2 class="font-display text-2xl font-semibold text-ink">Related guides</h2>
+          <div class="mt-6 grid gap-5 md:grid-cols-3">
+            {related.map((item) => (
+              <GuideCard guide={item} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>

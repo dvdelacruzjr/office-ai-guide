@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ink: #1c1917;
+  --color-ink-muted: #57534e;
+  --color-paper: #fbf8f3;
+  --color-paper-2: #f3eee6;
+  --color-card: #ffffff;
+  --color-line: #e7e0d5;
+  --color-accent: #0d7a70;
+  --color-accent-soft: #ccfbf1;
+  --color-claude: #c2410c;
+  --color-claude-soft: #ffedd5;
+  --color-grok: #1d4ed8;
+  --color-grok-soft: #dbeafe;
+  --color-chatgpt: #047857;
+  --color-chatgpt-soft: #d1fae5;
+  --color-multi: #7c3aed;
+  --color-multi-soft: #ede9fe;
+}
+
+
+/* Dark mode: same teal/peach/cream family, inverted surfaces */
+:root {
+  --hero-a: #ccfbf1;
+  --hero-b: #ffedd5;
+  --code-bg: #1c1917;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --color-ink: #f5efe6;
+    --color-ink-muted: #b8b0a4;
+    --color-paper: #14110f;
+    --color-paper-2: #1d1916;
+    --color-card: #221d1a;
+    --color-line: #3a332d;
+    --color-accent: #2dd4bf;
+    --color-accent-soft: #134e4a;
+    --color-claude: #fdba74;
+    --color-claude-soft: #431407;
+    --color-grok: #93c5fd;
+    --color-grok-soft: #172554;
+    --color-chatgpt: #6ee7b7;
+    --color-chatgpt-soft: #064e3b;
+    --color-multi: #c4b5fd;
+    --color-multi-soft: #2e1065;
+    --hero-a: #0f3b38;
+    --hero-b: #3b2314;
+    --code-bg: #0c0a09;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent-soft text-ink;
+  }
+
+  a {
+    @apply text-accent underline-offset-4 hover:underline;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-paper no-underline transition hover:opacity-85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line bg-card px-5 py-2.5 text-sm font-semibold text-ink no-underline transition hover:bg-paper-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-card shadow-sm;
+  }
+
+  .prose-guide {
+    @apply max-w-none text-[1.075rem] leading-[1.75] text-ink;
+  }
+
+  .prose-guide h2 {
+    @apply font-display mt-10 mb-3 scroll-mt-24 text-2xl font-semibold tracking-tight text-ink;
+  }
+
+  .prose-guide h3 {
+    @apply mt-8 mb-2 scroll-mt-24 text-lg font-semibold text-ink;
+  }
+
+  .prose-guide p,
+  .prose-guide ul,
+  .prose-guide ol {
+    @apply mb-4 text-ink-muted;
+  }
+
+  .prose-guide ul {
+    @apply list-disc pl-5;
+  }
+
+  .prose-guide ol {
+    @apply list-decimal pl-5;
+  }
+
+  .prose-guide li {
+    @apply mb-1;
+  }
+
+  .prose-guide strong {
+    @apply font-semibold text-ink;
+  }
+
+  .prose-guide code {
+    @apply rounded bg-paper-2 px-1.5 py-0.5 font-mono text-[0.9em] text-ink;
+  }
+
+  .prose-guide pre {
+    @apply mb-4 overflow-x-auto rounded-xl border border-line bg-[var(--code-bg)] p-4 font-mono text-sm text-stone-100;
+  }
+
+  .prose-guide blockquote {
+    @apply my-6 border-l-4 border-accent bg-accent-soft/40 px-4 py-3 text-ink;
+  }
+
+  .prose-guide a {
+    @apply font-medium;
+  }
+
+  .fill-blank {
+    @apply rounded bg-amber-100 px-1 font-semibold text-amber-950;
+  }
+
+  .tool-claude {
+    @apply bg-claude-soft text-claude;
+  }
+
+  .tool-grok {
+    @apply bg-grok-soft text-grok;
+  }
+
+  .tool-chatgpt {
+    @apply bg-chatgpt-soft text-chatgpt;
+  }
+
+  .tool-multi {
+    @apply bg-multi-soft text-multi;
+  }
+}
+
+@layer components {
+  .hover-card {
+    @apply transition duration-200 hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg;
+  }
+  .hero-bg {
+    background:
+      radial-gradient(circle at 0% 0%, var(--hero-a) 0%, transparent 45%),
+      radial-gradient(circle at 100% 0%, var(--hero-b) 0%, transparent 40%),
+      linear-gradient(var(--color-paper), var(--color-paper-2));
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.16em] text-accent;
+  }
+  .page-title {
+    @apply font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl;
+  }
+  .chip {
+    @apply rounded-full bg-paper-2 px-2.5 py-1 text-[11px] font-medium uppercase tracking-wide text-ink-muted;
+  }
+  .tool-bar-claude { @apply bg-claude; }
+  .tool-bar-grok { @apply bg-grok; }
+  .tool-bar-chatgpt { @apply bg-chatgpt; }
+  .tool-bar-multi { @apply bg-multi; }
+
+  .callout {
+    @apply my-6 rounded-xl border px-5 py-4 text-ink;
+    border-left-width: 4px;
+  }
+  .callout p { @apply mb-0 text-ink; }
+  .callout-tip { @apply border-accent/40 border-l-accent bg-accent-soft/50; }
+  .callout-warn { @apply border-claude/40 border-l-claude bg-claude-soft/60; }
+  .prose-guide blockquote:not(.callout) { @apply rounded-r-xl; }
+  .prose-guide > h2:first-child { @apply mt-0; }
+  .prose-guide ol > li::marker { @apply font-semibold text-accent; }
+  .prose-guide table { @apply my-6 w-full border-collapse overflow-hidden rounded-xl border border-line text-sm; }
+  .prose-guide th { @apply bg-paper-2 px-4 py-3 text-left font-semibold text-ink; }
+  .prose-guide td { @apply border-t border-line px-4 py-3 text-ink-muted; }
+  .prose-guide h3 { @apply flex items-baseline gap-2; }
+}
+
+.copy-pre { position: relative; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hover-card { transition: none; }
+}

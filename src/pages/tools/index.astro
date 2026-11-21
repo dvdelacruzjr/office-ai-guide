@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Compare AI Tools & Safe Adoption"
+  description="Which AI tool for which office task—Claude, Grok Bot, and ChatGPT compared in plain business English, plus a safe-use checklist."
+>
+  <section class="hero-bg border-b border-line">
+    <div class="container-page py-14">
+      <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Tools & adoption</p>
+      <h1 class="font-display mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+        Which AI tool for which office task?
+      </h1>
+      <p class="mt-4 max-w-2xl text-ink-muted">
+        A practical side-by-side for business owners. Strengths overlap—pick based on the job, your data controls, and what your team will actually use.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-12">
+    <div class="overflow-x-auto rounded-2xl border border-line bg-card shadow-sm">
+      <table class="min-w-full text-left text-sm">
+        <thead class="bg-paper-2 text-xs uppercase tracking-wide text-ink-muted">
+          <tr>
+            <th class="px-5 py-4 font-semibold">Office task</th>
+            <th class="px-5 py-4 font-semibold text-claude">Claude</th>
+            <th class="px-5 py-4 font-semibold text-grok">Grok Bot</th>
+            <th class="px-5 py-4 font-semibold text-chatgpt">ChatGPT</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-line text-ink-muted">
+          <tr>
+            <td class="px-5 py-4 font-medium text-ink">Long document / contract review</td>
+            <td class="px-5 py-4"><strong class="text-ink">Strong fit</strong> — careful reading & risk language</td>
+            <td class="px-5 py-4">Useful for summaries & follow-up research</td>
+            <td class="px-5 py-4">Solid drafting partner; verify citations</td>
+          </tr>
+          <tr class="bg-paper/40">
+            <td class="px-5 py-4 font-medium text-ink">SOP & policy writing</td>
+            <td class="px-5 py-4"><strong class="text-ink">Strong fit</strong> — clear structure & tone control</td>
+            <td class="px-5 py-4">Good for turning routines into checklists</td>
+            <td class="px-5 py-4"><strong class="text-ink">Strong fit</strong> — fast structured drafts</td>
+          </tr>
+          <tr>
+            <td class="px-5 py-4 font-medium text-ink">Inbox / calendar triage</td>
+            <td class="px-5 py-4">Great for rewriting replies</td>
+            <td class="px-5 py-4"><strong class="text-ink">Strong fit</strong> — recurring agent-style routines</td>
+            <td class="px-5 py-4">Good with custom GPTs / scheduled workflows</td>
+          </tr>
+          <tr class="bg-paper/40">
+            <td class="px-5 py-4 font-medium text-ink">Meeting notes → action plans</td>
+            <td class="px-5 py-4">Excellent narrative summaries</td>
+            <td class="px-5 py-4">Helpful for digests & reminders</td>
+            <td class="px-5 py-4"><strong class="text-ink">Strong fit</strong> — tables & send-ready emails</td>
+          </tr>
+          <tr>
+            <td class="px-5 py-4 font-medium text-ink">Client proposals</td>
+            <td class="px-5 py-4"><strong class="text-ink">Strong fit</strong> — polished, careful tone</td>
+            <td class="px-5 py-4">Useful for market/competitor add-ons</td>
+            <td class="px-5 py-4"><strong class="text-ink">Strong fit</strong> — outlines & packaging options</td>
+          </tr>
+          <tr class="bg-paper/40">
+            <td class="px-5 py-4 font-medium text-ink">Spreadsheets & formulas</td>
+            <td class="px-5 py-4">Good explanations</td>
+            <td class="px-5 py-4">Fine for light analysis briefs</td>
+            <td class="px-5 py-4"><strong class="text-ink">Strong fit</strong> — formula builders & QA checklists</td>
+          </tr>
+          <tr>
+            <td class="px-5 py-4 font-medium text-ink">Recurring research digests</td>
+            <td class="px-5 py-4">Strong synthesis from long source packs</td>
+            <td class="px-5 py-4"><strong class="text-ink">Strong fit</strong> — routines + reminders</td>
+            <td class="px-5 py-4">Strong drafting of the weekly update</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-6 grid gap-5 md:grid-cols-3">
+      <a href="/guides?tool=Claude" class="card hover-card p-5 no-underline">
+        <p class="text-sm font-semibold text-claude">Claude guides →</p>
+        <p class="mt-2 text-sm text-ink-muted">SOPs, contracts, careful client writing.</p>
+      </a>
+      <a href="/guides?tool=Grok+Bot" class="card hover-card p-5 no-underline">
+        <p class="text-sm font-semibold text-grok">Grok Bot guides →</p>
+        <p class="mt-2 text-sm text-ink-muted">Inbox triage, calendars, research routines.</p>
+      </a>
+      <a href="/guides?tool=ChatGPT" class="card hover-card p-5 no-underline">
+        <p class="text-sm font-semibold text-chatgpt">ChatGPT guides →</p>
+        <p class="mt-2 text-sm text-ink-muted">Meetings, proposals, spreadsheet help.</p>
+      </a>
+    </div>
+  </section>
+
+  <section class="border-t border-line bg-paper-2/50 py-14">
+    <div class="container-page max-w-3xl">
+      <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Share with your staff</p>
+      <h2 class="font-display mt-3 text-3xl font-semibold text-ink">AI Safe-Use Policy Checklist</h2>
+      <p class="mt-3 text-ink-muted">
+        A concise starter checklist business owners can paste into a handbook or Slack canvas. Customize with your counsel.
+      </p>
+      <div class="card mt-8 p-6 sm:p-8">
+        <ol class="space-y-4 text-sm leading-relaxed text-ink-muted">
+          <li><strong class="text-ink">1. Prefer business/enterprise plans</strong> for work involving customers, employees, or finances.</li>
+          <li><strong class="text-ink">2. Never paste secrets</strong> — passwords, API keys, payroll files, health data, full payment card data, or authentication codes.</li>
+          <li><strong class="text-ink">3. Minimize client data</strong> — use initials, sample rows, or redacted excerpts when testing prompts.</li>
+          <li><strong class="text-ink">4. Human review before send</strong> — anything client-facing, contractual, or financial gets a named reviewer.</li>
+          <li><strong class="text-ink">5. Label AI assistance</strong> when your industry or client agreement expects disclosure.</li>
+          <li><strong class="text-ink">6. No autopilot outbound</strong> — do not auto-send email, invoices, or calendar invites without a person clicking send.</li>
+          <li><strong class="text-ink">7. Keep a tool allowlist</strong> — Claude, Grok Bot, and ChatGPT (or your approved equivalents) only.</li>
+          <li><strong class="text-ink">8. Report incidents quickly</strong> — accidental pastes of sensitive data go to your security/ops owner the same day.</li>
+          <li><strong class="text-ink">9. Store finals in company systems</strong> — handbook, Drive, CRM—not only in a chat history.</li>
+          <li><strong class="text-ink">10. Retrain quarterly</strong> — refresh examples as products and your policies change.</li>
+        </ol>
+        <button
+          type="button"
+          class="btn-primary mt-8"
+          data-label="Copy checklist"
+          data-copy={`AI Safe-Use Policy Checklist
+1. Prefer business/enterprise plans for customer, employee, or financial work.
+2. Never paste secrets (passwords, keys, payroll, health data, payment cards, auth codes).
+3. Minimize client data; use redactions or sample rows when testing.
+4. Human review before anything client-facing, contractual, or financial is sent.
+5. Label AI assistance when required by industry or client agreement.
+6. No autopilot outbound email, invoices, or invites.
+7. Keep an approved-tool allowlist.
+8. Report sensitive-data incidents the same day.
+9. Store final documents in company systems.
+10. Retrain the team quarterly.`}
+        >
+          Copy checklist
+        </button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import { siteConfig } from '../config/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-20 border-t border-line bg-paper-2">
+  <div class="container-page grid gap-10 py-12 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div>
+      <p class="font-display text-2xl font-semibold text-ink">{siteConfig.name}</p>
+      <p class="mt-3 max-w-md text-sm leading-relaxed text-ink-muted">{siteConfig.tagline}</p>
+      <p class="mt-4 text-sm text-ink-muted">
+        Built for business owners and office teams adopting Claude, Grok Bot, and ChatGPT without the hype.
+      </p>
+    </div>
+    <div>
+      <p class="text-sm font-semibold text-ink">Explore</p>
+      <ul class="mt-3 space-y-2 text-sm">
+        {siteConfig.nav.map((item) => (
+          <li>
+            <a href={item.href} class="text-ink-muted no-underline hover:text-accent">
+              {item.label}
+            </a>
+          </li>
+        ))}
+        <li>
+          <a href="/rss.xml" class="text-ink-muted no-underline hover:text-accent">
+            RSS feed
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-sm font-semibold text-ink">Use AI safely</p>
+      <p class="mt-3 text-sm leading-relaxed text-ink-muted">
+        Keep credentials and sensitive personal data out of prompts, check facts before sharing, and use the plans your company has approved.
+      </p>
+      <a href="/guides/team-ai-usage-policy" class="mt-3 inline-block text-sm font-semibold">Write a team AI policy →</a>
+    </div>
+  </div>
+  <div class="border-t border-line">
+    <div class="container-page flex flex-col gap-2 py-5 text-xs text-ink-muted sm:flex-row sm:items-center sm:justify-between">
+      <p>© {year} {siteConfig.name}. Practical guidance, not legal advice.</p>
+      <p>Safe-use notes belong in every guide—use business/enterprise plans for sensitive work.</p>
+    </div>
+  </div>
+</footer>

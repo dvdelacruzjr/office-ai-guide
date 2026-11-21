@@ -1,0 +1,24 @@
+---
+interface Props {
+  tool: 'Claude' | 'Grok Bot' | 'ChatGPT' | 'Multi-Tool';
+  size?: 'sm' | 'md';
+}
+
+const { tool, size = 'sm' } = Astro.props;
+const classMap = {
+  Claude: 'tool-claude',
+  'Grok Bot': 'tool-grok',
+  ChatGPT: 'tool-chatgpt',
+  'Multi-Tool': 'tool-multi',
+} as const;
+---
+
+<span
+  class:list={[
+    'inline-flex items-center rounded-full font-semibold tracking-wide',
+    classMap[tool],
+    size === 'sm' ? 'px-2.5 py-1 text-[11px] uppercase' : 'px-3 py-1.5 text-xs uppercase',
+  ]}
+>
+  {tool}
+</span>

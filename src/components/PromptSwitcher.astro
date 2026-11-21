@@ -1,0 +1,92 @@
+---
+import { prompts } from '../data/prompts';
+import { highlightPlaceholders } from '../data/prompts';
+
+const samples = [
+  prompts.find((p) => p.id === 'claude-sop-from-notes')!,
+  prompts.find((p) => p.id === 'grok-inbox-triage')!,
+  prompts.find((p) => p.id === 'chatgpt-meeting-actions')!,
+];
+---
+
+<section class="card overflow-hidden" data-prompt-switcher>
+  <div class="border-b border-line bg-paper-2 px-5 py-4 sm:px-6">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Try a sample prompt</p>
+        <h2 class="font-display mt-1 text-2xl font-semibold text-ink">Copy-ready office prompts</h2>
+      </div>
+      <div class="flex flex-wrap gap-2" role="tablist" aria-label="Sample prompts by tool">
+        {
+          samples.map((sample, index) => (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={index === 0 ? 'true' : 'false'}
+              class:list={[
+                'rounded-full px-3 py-1.5 text-sm font-semibold transition',
+                index === 0 ? 'bg-ink text-paper' : 'bg-card text-ink-muted hover:bg-paper',
+              ]}
+              data-switch-tab={sample.id}
+            >
+              {sample.tool}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  {
+    samples.map((sample, index) => (
+      <div
+        class:list={['p-5 sm:p-6', index === 0 ? '' : 'hidden']}
+        data-switch-panel={sample.id}
+        role="tabpanel"
+      >
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <h3 class="text-lg font-semibold text-ink">{sample.title}</h3>
+            <p class="mt-1 text-sm text-ink-muted">{sample.summary}</p>
+          </div>
+          <button
+            type="button"
+            class="btn-primary shrink-0"
+            data-copy={sample.prompt}
+            data-label="Copy prompt"
+          >
+            Copy prompt
+          </button>
+        </div>
+        <pre
+          class="mt-4 overflow-x-auto whitespace-pre-wrap rounded-xl border border-line bg-[var(--code-bg)] p-4 font-mono text-[12.5px] leading-relaxed text-stone-100"
+          set:html={highlightPlaceholders(sample.prompt)}
+        />
+      </div>
+    ))
+  }
+</section>
+
+<script>
+  const root = document.querySelector('[data-prompt-switcher]');
+  if (root) {
+    const tabs = root.querySelectorAll<HTMLButtonElement>('[data-switch-tab]');
+    const panels = root.querySelectorAll<HTMLElement>('[data-switch-panel]');
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const id = tab.getAttribute('data-switch-tab');
+        tabs.forEach((t) => {
+          const active = t === tab;
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+          t.classList.toggle('bg-ink', active);
+          t.classList.toggle('text-paper', active);
+          t.classList.toggle('bg-card', !active);
+          t.classList.toggle('text-ink-muted', !active);
+        });
+        panels.forEach((panel) => {
+          panel.classList.toggle('hidden', panel.getAttribute('data-switch-panel') !== id);
+        });
+      });
+    });
+  }
+</script>

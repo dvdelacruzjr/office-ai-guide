@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PromptCard from '../../components/PromptCard.astro';
+import { prompts } from '../../data/prompts';
+
+const tools = ['Claude', 'Grok Bot', 'ChatGPT', 'Multi-Tool'] as const;
+const departments = [
+  'Operations',
+  'Sales & Client Comms',
+  'Finance & Admin',
+  'Leadership & Strategy',
+  'HR & People',
+  'Marketing',
+] as const;
+---
+
+<BaseLayout
+  title="Prompt Library"
+  description="Copy-ready business prompts for Claude, Grok Bot, and ChatGPT with fill-in-the-blank placeholders."
+>
+  <section class="hero-bg border-b border-line">
+    <div class="container-page py-14">
+      <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Prompt library</p>
+      <h1 class="font-display mt-3 text-4xl font-semibold tracking-tight text-ink sm:text-5xl">Ready-to-use office prompts</h1>
+      <p class="mt-4 max-w-2xl text-ink-muted">
+        Highlighted <span class="fill-blank">[fill-in-the-blank]</span> placeholders make each prompt easy to adapt. One-click copy included.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-10">
+    <form id="prompt-filters" class="card grid gap-4 p-5 md:grid-cols-[1.2fr_1fr_1fr_auto]">
+      <div>
+        <label for="pq" class="text-xs font-semibold uppercase tracking-wide text-ink-muted">Search</label>
+        <input id="pq" type="search" placeholder="inbox, contract, proposal…" class="mt-2 w-full rounded-xl border border-line bg-paper px-3 py-2.5 text-sm outline-none ring-accent focus:ring-2" />
+      </div>
+      <div>
+        <label for="ptool" class="text-xs font-semibold uppercase tracking-wide text-ink-muted">AI tool</label>
+        <select id="ptool" class="mt-2 w-full rounded-xl border border-line bg-paper px-3 py-2.5 text-sm outline-none ring-accent focus:ring-2">
+          <option value="">All tools</option>
+          {tools.map((tool) => <option value={tool}>{tool}</option>)}
+        </select>
+      </div>
+      <div>
+        <label for="pdept" class="text-xs font-semibold uppercase tracking-wide text-ink-muted">Department</label>
+        <select id="pdept" class="mt-2 w-full rounded-xl border border-line bg-paper px-3 py-2.5 text-sm outline-none ring-accent focus:ring-2">
+          <option value="">All departments</option>
+          {departments.map((dept) => <option value={dept}>{dept}</option>)}
+        </select>
+      </div>
+      <div class="flex items-end">
+        <button type="reset" class="btn-secondary w-full">Reset</button>
+      </div>
+    </form>
+
+    <p id="prompt-count" class="mt-6 text-sm text-ink-muted">{prompts.length} prompts</p>
+    <div id="prompt-grid" class="mt-4 grid gap-5 lg:grid-cols-2">
+      {prompts.map((prompt) => <PromptCard prompt={prompt} />)}
+    </div>
+    <p id="prompt-empty" class="mt-10 hidden rounded-2xl border border-dashed border-line bg-paper-2 p-8 text-center text-ink-muted">
+      No prompts match. Clear filters or try another keyword.
+    </p>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('prompt-filters') as HTMLFormElement | null;
+  const q = document.getElementById('pq') as HTMLInputElement | null;
+  const tool = document.getElementById('ptool') as HTMLSelectElement | null;
+  const dept = document.getElementById('pdept') as HTMLSelectElement | null;
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-prompt-card]'));
+  const count = document.getElementById('prompt-count');
+  const empty = document.getElementById('prompt-empty');
+
+  function applyFilters() {
+    const query = (q?.value || '').trim().toLowerCase();
+    const toolValue = tool?.value || '';
+    const deptValue = dept?.value || '';
+    let visible = 0;
+    cards.forEach((card) => {
+      const hay = `${card.dataset.title || ''} ${card.dataset.summary || ''}`;
+      const show =
+        (!query || hay.includes(query)) &&
+        (!toolValue || card.dataset.tool === toolValue) &&
+        (!deptValue || card.dataset.department === deptValue);
+      card.classList.toggle('hidden', !show);
+      if (show) visible += 1;
+    });
+    if (count) count.textContent = `${visible} prompt${visible === 1 ? '' : 's'}`;
+    empty?.classList.toggle('hidden', visible !== 0);
+  }
+
+  form?.addEventListener('input', applyFilters);
+  form?.addEventListener('change', applyFilters);
+  form?.addEventListener('reset', () => window.setTimeout(applyFilters, 0));
+</script>

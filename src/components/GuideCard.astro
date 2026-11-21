@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ToolBadge from './ToolBadge.astro';
+
+interface Props {
+  guide: CollectionEntry<'guides'>;
+}
+
+const { guide } = Astro.props;
+const barKey = ({ Claude: 'claude', 'Grok Bot': 'grok', ChatGPT: 'chatgpt', 'Multi-Tool': 'multi' } as const)[guide.data.tool];
+const { title, summary, tool, department, difficulty, timeToComplete } = guide.data;
+---
+
+<article class="card hover-card group relative flex h-full flex-col overflow-hidden p-6">
+  <span class:list={['absolute inset-x-0 top-0 h-1', `tool-bar-${barKey}`]}></span>
+  <div class="flex flex-wrap items-center gap-2">
+    <ToolBadge tool={tool} />
+    <span class="chip">
+      {department}
+    </span>
+  </div>
+  <h3 class="font-display mt-4 text-xl font-semibold leading-snug text-ink">
+    <a href={`/guides/${guide.id}`} class="text-ink no-underline after:absolute after:inset-0 group-hover:text-accent">
+      {title}
+    </a>
+  </h3>
+  <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-muted">{summary}</p>
+  <div class="mt-5 flex items-center justify-between border-t border-line pt-4 text-xs text-ink-muted">
+    <span>{difficulty}</span>
+    <span>{timeToComplete}</span>
+  </div>
+</article>
