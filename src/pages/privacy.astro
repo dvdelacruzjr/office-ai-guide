@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Privacy"
+  description="How Office AI Guide handles data today: a static site, no accounts, no cookies set by the site, and Cloudflare request logs."
+>
+  <section class="hero-bg border-b border-line">
+    <div class="container-page py-14">
+      <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Privacy</p>
+      <h1 class="page-title mt-3">Privacy</h1>
+      <p class="mt-4 text-sm text-ink-muted">Last updated November 25, 2026</p>
+    </div>
+  </section>
+  <section class="container-page max-w-3xl py-12 prose-guide">
+    <p>
+      This page describes how officeaiguide.com works today. It is written in plain language. It is not a privacy-law memo, and it will be updated if the site starts collecting more information.
+    </p>
+    <h2>What this site is</h2>
+    <p>
+      Office AI Guide is a static website. Pages are built in advance and served as files. You do not create an account, and the site does not have a login, a profile, or a database of readers.
+    </p>
+    <h2>What the site itself collects</h2>
+    <p>
+      The site does not ask for your name or email. The newsletter note on the homepage is not a form and does not submit an address. There is no comment system and no embedded advertising network.
+    </p>
+    <p>
+      The site itself does not set cookies. It does not run a first-party analytics script, a tag manager, or a marketing pixel.
+    </p>
+    <h2>Cloudflare</h2>
+    <p>
+      The site is hosted on Cloudflare Pages. When your browser requests a page, Cloudflare processes that request so it can deliver the file. That processing can include connection and request logs, such as IP address, user agent, the URL requested, and the time of the request, under Cloudflare’s own systems and terms. Office AI Guide does not operate a separate visitor database on top of that.
+    </p>
+    <h2>Links to other sites</h2>
+    <p>
+      Guides link to vendor documentation, pricing pages, and similar third-party sites. Those sites have their own privacy practices. Following a link leaves this site.
+    </p>
+    <h2>What may change</h2>
+    <p>
+      Analytics or a newsletter may be added later. If either one is added, this page will be updated to say what is collected, who receives it, and how to opt out, before or when that feature goes live.
+    </p>
+    <h2>Contact</h2>
+    <p>
+      Privacy questions can be sent from the <a href="/contact/">contact page</a>.
+    </p>
+  </section>
+</BaseLayout>

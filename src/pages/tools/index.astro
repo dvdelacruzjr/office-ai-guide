@@ -77,18 +77,44 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
 
     <div class="mt-6 grid gap-5 md:grid-cols-3">
-      <a href="/guides?tool=Claude" class="card hover-card p-5 no-underline">
+      <a href="/guides/?tool=Claude" class="card hover-card p-5 no-underline">
         <p class="text-sm font-semibold text-claude">Claude guides →</p>
         <p class="mt-2 text-sm text-ink-muted">SOPs, contracts, careful client writing.</p>
       </a>
-      <a href="/guides?tool=Grok+Bot" class="card hover-card p-5 no-underline">
+      <a href="/guides/?tool=Grok+Bot" class="card hover-card p-5 no-underline">
         <p class="text-sm font-semibold text-grok">Grok Bot guides →</p>
         <p class="mt-2 text-sm text-ink-muted">Inbox triage, calendars, research routines.</p>
       </a>
-      <a href="/guides?tool=ChatGPT" class="card hover-card p-5 no-underline">
+      <a href="/guides/?tool=ChatGPT" class="card hover-card p-5 no-underline">
         <p class="text-sm font-semibold text-chatgpt">ChatGPT guides →</p>
         <p class="mt-2 text-sm text-ink-muted">Meetings, proposals, spreadsheet help.</p>
       </a>
+    </div>
+
+    <div class="mt-12">
+      <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent">More comparisons</p>
+      <h2 class="font-display mt-2 text-2xl font-semibold text-ink">Office tools beyond the chat window</h2>
+      <p class="mt-3 max-w-2xl text-sm text-ink-muted">
+        These guides compare products a small office actually buys. Prices and features change, so each one links to the vendor’s current page.
+      </p>
+      <div class="mt-6 grid gap-5 md:grid-cols-2">
+        <a href="/guides/microsoft-365-copilot-vs-chatgpt-business-vs-claude-team/" class="card hover-card p-5 no-underline">
+          <p class="text-sm font-semibold text-ink">Copilot vs ChatGPT Business vs Claude Team</p>
+          <p class="mt-2 text-sm text-ink-muted">Which paid workspace fits a small office that already lives in Microsoft 365, or doesn’t.</p>
+        </a>
+        <a href="/guides/ai-meeting-note-takers-fireflies-otter-teams/" class="card hover-card p-5 no-underline">
+          <p class="text-sm font-semibold text-ink">Fireflies vs Otter vs Teams recap</p>
+          <p class="mt-2 text-sm text-ink-muted">Meeting notes from a bot in the call, or from Teams Premium and Copilot.</p>
+        </a>
+        <a href="/guides/zapier-vs-make-office-automation/" class="card hover-card p-5 no-underline">
+          <p class="text-sm font-semibold text-ink">Zapier vs Make</p>
+          <p class="mt-2 text-sm text-ink-muted">How the two automation tools bill, and where an AI step changes the cost.</p>
+        </a>
+        <a href="/guides/secure-ai-office-stack/" class="card hover-card p-5 no-underline">
+          <p class="text-sm font-semibold text-ink">A secure AI office stack</p>
+          <p class="mt-2 text-sm text-ink-muted">Password manager, business access, admin settings, and data rules that sit under the chat tools.</p>
+        </a>
+      </div>
     </div>
   </section>
 

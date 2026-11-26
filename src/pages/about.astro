@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About"
+  description="Office AI Guide publishes practical AI playbooks for business owners and office teams. It is independent of OpenAI, Anthropic, and xAI."
+>
+  <section class="hero-bg border-b border-line">
+    <div class="container-page py-14">
+      <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent">About</p>
+      <h1 class="page-title mt-3">What this site is</h1>
+    </div>
+  </section>
+  <section class="container-page max-w-3xl py-12 prose-guide">
+    <p>
+      Office AI Guide is a collection of practical AI playbooks for business owners and office teams. The guides cover everyday work: meeting notes, email, proposals, policies, and the admin settings around the tools.
+    </p>
+    <p>
+      Each playbook is written as steps you can try with sample or redacted content, plus copyable prompts and a safety note. The point is to make AI useful on a Monday morning without pretending a chatbot is a lawyer, an accountant, or an employee.
+    </p>
+    <h2>Independent</h2>
+    <p>
+      Office AI Guide is an independent publication. It is not affiliated with, endorsed by, or sponsored by OpenAI, Anthropic, or xAI. Claude, ChatGPT, Grok, and other product names are used so you can find the right instructions. They belong to their owners.
+    </p>
+    <p>
+      Guides describe products from public vendor documentation and pricing pages. Features and prices change. When a guide mentions money, it links to the vendor and tells you to check the current page.
+    </p>
+    <h2>What you will not find here</h2>
+    <ul>
+      <li>Accounts, dashboards, or a place to store your company data</li>
+      <li>A promise that an AI answer is correct</li>
+      <li>Legal, financial, medical, or HR advice</li>
+    </ul>
+    <p>
+      Questions about the site go to the <a href="/contact/">contact page</a>. How the site handles data is on the <a href="/privacy/">privacy page</a>.
+    </p>
+  </section>
+</BaseLayout>

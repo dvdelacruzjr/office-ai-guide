@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page not found"
+  description="That page is not on Office AI Guide. Try the guides, prompt library, or tool comparison."
+  noindex={true}
+>
+  <section class="hero-bg border-b border-line">
+    <div class="container-page py-20">
+      <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent">404</p>
+      <h1 class="page-title mt-3 max-w-2xl">Page not found</h1>
+      <p class="mt-4 max-w-xl text-lg text-ink-muted">
+        That address does not match a guide or page on this site. The links below are the main sections.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/guides/" class="btn-primary">Guides</a>
+        <a href="/prompts/" class="btn-secondary">Prompts</a>
+        <a href="/tools/" class="btn-secondary">Tools</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
