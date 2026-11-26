@@ -11,45 +11,11 @@ const { newsletter } = siteConfig;
       <p class="mt-3 max-w-xl text-sm leading-relaxed text-ink-muted">{newsletter.blurb}</p>
     </div>
     <div class="border-t border-line bg-paper-2 p-8 sm:p-10 md:border-l md:border-t-0">
-      <form
-        id="newsletter-form"
-        action={newsletter.formAction}
-        method={newsletter.formMethod}
-        class="space-y-3"
-        data-newsletter
-      >
-        <label class="block text-sm font-medium text-ink" for="email">Work email</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          autocomplete="email"
-          placeholder={newsletter.placeholder}
-          class="w-full rounded-xl border border-line bg-card px-4 py-3 text-sm text-ink outline-none ring-accent focus:ring-2"
-        />
-        <button type="submit" class="btn-primary w-full">{newsletter.buttonLabel}</button>
-        <p class="text-xs text-ink-muted">
-          Demo form: wire <code>formAction</code> in <code>src/config/site.ts</code> to your email provider.
-        </p>
-        <p id="newsletter-status" class="hidden text-sm font-medium text-accent" role="status"></p>
-      </form>
+      <p class="text-sm font-semibold text-ink">No email list yet</p>
+      <p class="mt-2 text-sm leading-relaxed text-ink-muted">
+        This is not a signup form. We are not collecting addresses, and nothing here is sent anywhere.
+      </p>
+      <a href="/rss.xml" class="btn-primary mt-5">Follow guides via RSS</a>
     </div>
   </div>
 </section>
-
-<script>
-  const form = document.querySelector<HTMLFormElement>('[data-newsletter]');
-  const status = document.getElementById('newsletter-status');
-  form?.addEventListener('submit', (event) => {
-    const action = form.getAttribute('action') || '';
-    if (action.startsWith('#') || action === '' || action.includes('example.com')) {
-      event.preventDefault();
-      if (status) {
-        status.textContent = 'You’re on the list. Watch for a playbook next week.';
-        status.classList.remove('hidden');
-      }
-      form.reset();
-    }
-  });
-</script>

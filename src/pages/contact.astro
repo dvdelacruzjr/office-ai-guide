@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact Office AI Guide. There is no contact form. Email is listed as a placeholder until the owner confirms the address."
+>
+  <section class="hero-bg border-b border-line">
+    <div class="container-page py-14">
+      <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Contact</p>
+      <h1 class="page-title mt-3">Contact</h1>
+    </div>
+  </section>
+  <section class="container-page max-w-3xl py-12 prose-guide">
+    <!-- TODO: Don must confirm this contact address before it is treated as a live inbox. hello@officeaiguide.com is a placeholder. -->
+    <p>There is no contact form on this site, and messages are not stored here.</p>
+    <p>
+      Email <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a> for questions about a guide, a correction, or the site itself.
+    </p>
+    <p>
+      Do not send passwords, customer files, payroll, health information, or other sensitive records. If a guide has a factual error, name the page and the sentence so it can be checked against the vendor’s documentation.
+    </p>
+  </section>
+</BaseLayout>

@@ -1,6 +1,6 @@
 /**
  * Central brand & site configuration.
- * Rename the product, swap the domain, or rewire the newsletter form from this file alone.
+ * Rename the product or swap the domain from this file.
  */
 export const siteConfig = {
   name: 'Office AI Guide',
@@ -11,9 +11,16 @@ export const siteConfig = {
   author: 'Office AI Guide Editorial',
   email: 'hello@officeaiguide.com',
   nav: [
-    { label: 'Guides', href: '/guides' },
-    { label: 'Prompt Library', href: '/prompts' },
-    { label: 'Compare Tools', href: '/tools' },
+    { label: 'Guides', href: '/guides/' },
+    { label: 'Prompt Library', href: '/prompts/' },
+    { label: 'Compare Tools', href: '/tools/' },
+  ],
+  legal: [
+    { label: 'About', href: '/about/' },
+    { label: 'Contact', href: '/contact/' },
+    { label: 'Privacy', href: '/privacy/' },
+    { label: 'Terms', href: '/terms/' },
+    { label: 'Affiliate disclosure', href: '/affiliate-disclosure/' },
   ],
   tools: [
     {
@@ -23,7 +30,7 @@ export const siteConfig = {
       accent: 'claude',
       summary:
         'Best for careful reading, long documents, SOPs, and contracts where tone and accuracy matter.',
-      href: '/guides?tool=Claude',
+      href: '/guides/?tool=Claude',
     },
     {
       id: 'grok-bot',
@@ -32,7 +39,7 @@ export const siteConfig = {
       accent: 'grok',
       summary:
         'Best for inbox triage, calendar routines, research digests, and agent-style recurring office workflows.',
-      href: '/guides?tool=Grok+Bot',
+      href: '/guides/?tool=Grok+Bot',
     },
     {
       id: 'chatgpt',
@@ -41,19 +48,13 @@ export const siteConfig = {
       accent: 'chatgpt',
       summary:
         'Best for structured drafts, meeting action plans, proposals, and spreadsheet formula help.',
-      href: '/guides?tool=ChatGPT',
+      href: '/guides/?tool=ChatGPT',
     },
   ] as const,
   newsletter: {
-    heading: 'Get one practical AI playbook each week',
+    heading: 'Newsletter coming soon',
     blurb:
-      'Short, office-ready workflows for Claude, Grok Bot, and ChatGPT. No hype—just things your team can try Monday morning.',
-    placeholder: 'you@company.com',
-    buttonLabel: 'Join the list',
-    successMessage: 'You’re on the list. Watch for a playbook next week.',
-    // Wire this endpoint to Buttondown, ConvertKit, Resend, Mailchimp, etc.
-    formAction: '#newsletter',
-    formMethod: 'POST' as const,
+      'Email updates are not open yet. New guides are published on the site, and you can follow them with the RSS feed.',
   },
   social: {
     twitter: '',

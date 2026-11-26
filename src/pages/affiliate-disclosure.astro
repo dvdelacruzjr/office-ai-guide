@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
+---
+
+<BaseLayout
+  title="Affiliate disclosure"
+  description="Office AI Guide may earn commissions from some links at no extra cost to readers. Recommendations are independent."
+>
+  <section class="hero-bg border-b border-line">
+    <div class="container-page py-14">
+      <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Disclosure</p>
+      <h1 class="page-title mt-3">Affiliate disclosure</h1>
+      <p class="mt-4 text-sm text-ink-muted">Last updated November 25, 2026</p>
+    </div>
+  </section>
+  <section class="container-page max-w-3xl py-12 prose-guide">
+    <AffiliateDisclosure />
+    <p>
+      This notice follows the expectation in the U.S. Federal Trade Commission’s endorsement guides, 16 CFR Part 255, that a material connection between a publisher and a seller is disclosed clearly.
+    </p>
+    <p>
+      Office AI Guide may earn a commission if you click a link and buy a product or start a paid plan. That commission, when one exists, is paid by the seller. It does not add a fee on top of the price you pay.
+    </p>
+    <p>
+      Recommendations are independent. A commission does not decide which product is described, how the steps are written, or whether a limitation is included. Guides are based on vendor documentation and on the workflow, and they say when a price or feature should be rechecked.
+    </p>
+    <p>
+      As of this update, the site does not include affiliate links. This page is here so the policy is public before any are added. If that changes, the short disclosure can be placed on the guide pages that contain those links.
+    </p>
+    <p>
+      Product names are used for identification. Mentioning a company is not, by itself, an endorsement or a paid relationship.
+    </p>
+  </section>
+</BaseLayout>

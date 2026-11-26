@@ -473,6 +473,138 @@ Data involved: [DATA DESCRIPTION, NO REAL DETAILS]
 
 Classify the task, tell me what to check about data rules before starting, suggest what to test side by side with sample content, and propose a human review step. Do not claim product features you are unsure about; tell me what to verify.`,
   },
+  {
+    id: 'multi-paid-ai-workspace',
+    title: 'Pick a paid AI workspace to pilot',
+    tool: 'Multi-Tool',
+    department: 'Leadership & Strategy',
+    summary: 'Score Copilot, ChatGPT Business, and Claude Team against one real task.',
+    prompt: `We are choosing a paid AI workspace for a [INDUSTRY] office of [EMPLOYEE COUNT] people.
+The work files live in [MICROSOFT 365 / GOOGLE / MOSTLY LOCAL FILES / MIXED].
+The task we will pilot: [ONE TASK].
+Tools we are allowed to try: [LIST].
+
+Do not recommend a product by brand. Ask what we should verify on each vendor’s current pricing and admin page, list the data we should not upload during a pilot, and give a 5-item scorecard we can fill in after we run the same sample task in each tool.`,
+  },
+  {
+    id: 'multi-ai-seat-budget',
+    title: 'Draft an AI seat budget',
+    tool: 'Multi-Tool',
+    department: 'Finance & Admin',
+    summary: 'Turn published seat prices into a first-year cost with a usage caveat.',
+    prompt: `Build a first-year seat budget worksheet for [COMPANY].
+
+Plans we are comparing (use only prices I paste; do not look up or invent prices): [PASTE PRICES AND BILLING PERIOD]
+People who need a seat in month one: [ROLES AND COUNT]
+People who can wait: [ROLES]
+Usage charges the vendor bills on top of the seat: [PASTE WHAT THE PRICING PAGE SAYS, OR "UNKNOWN"]
+
+Output a table: plan, seats, billing period, seat cost, unknown usage, total we can defend. List questions to confirm on the vendor’s pricing page. Do not invent a discount.`,
+  },
+  {
+    id: 'multi-meeting-notes-rule',
+    title: 'Write a meeting note-taker rule',
+    tool: 'Multi-Tool',
+    department: 'Operations',
+    summary: 'When a recap or a meeting bot is allowed, and when it is not.',
+    prompt: `Draft a one-page meeting-notes rule for [COMPANY].
+
+Meetings we have: [TEAMS ONLY / TEAMS + ZOOM / MOSTLY IN PERSON].
+Tool we are allowed to pilot: [TEAMS RECAP / FIREFLIES / OTTER / NONE YET].
+Meetings that are out of scope: [HR / LEGAL / CLIENT NAMES].
+
+Include: when the note-taker may join, what the host says at the start, where the notes are stored, who reviews action items before they are assigned, and how someone opts out. Under 350 words. Mark anything you are unsure about with [CONFIRM].`,
+  },
+  {
+    id: 'multi-recap-to-actions',
+    title: 'Turn a recap into an action list',
+    tool: 'Multi-Tool',
+    department: 'Operations',
+    summary: 'Extract decisions and TBD owners without inventing either.',
+    prompt: `Turn these meeting notes into an action list.
+
+Meeting: [TITLE]
+Date: [DATE]
+
+Output:
+- Decisions, only if the notes state them
+- Table: task, suggested owner, due date or TBD, dependency
+- Points the notes do not support
+
+If a name or date is missing, write TBD. Do not invent decisions.
+
+Notes:
+[PASTE REDACTED NOTES]`,
+  },
+  {
+    id: 'multi-bot-disclosure',
+    title: 'Say a note-taker is in the meeting',
+    tool: 'Multi-Tool',
+    department: 'Sales & Client Comms',
+    summary: 'A short script the host can read when a bot or recap is on.',
+    prompt: `Write a 40-word script a meeting host can read at the start.
+
+Tool recording or transcribing: [TOOL NAME]
+Where notes will be stored: [PLACE]
+Who can ask to pause it: [ROLE]
+
+Plain language. No joke. Do not claim the recording is deleted unless I said that it is.`,
+  },
+  {
+    id: 'multi-automation-volume',
+    title: 'Estimate an automation’s task or credit use',
+    tool: 'Multi-Tool',
+    department: 'Operations',
+    summary: 'Count steps in a Zapier or Make scenario, including an AI draft.',
+    prompt: `We want to automate this office process:
+Trigger: [WHAT STARTS IT]
+Steps today, done by hand: [LIST]
+Volume: about [NUMBER] times per month
+Apps involved: [LIST]
+Where a human must still approve: [STEP]
+
+Tell me how many Zapier tasks and how many Make credits a single run might use if one of the steps is an AI draft. State what you are assuming. List the steps that should not run unattended. Do not invent prices.`,
+  },
+  {
+    id: 'multi-automation-failure-test',
+    title: 'Test an AI automation before it emails anyone',
+    tool: 'Multi-Tool',
+    department: 'Operations',
+    summary: 'Find duplicate sends and invented facts in a draft-only flow.',
+    prompt: `Review this automation design for a small office. Do not write code.
+
+Trigger: [TRIGGER]
+Step: AI writes a draft from the incoming record
+Step: save the draft in [WHERE A PERSON REVIEWS IT]
+Human: sends or files the result
+
+List ways this can send the wrong text, duplicate a reply, or leak sample data into a real mailbox. Suggest a test checklist of 5 checks using fake rows only.`,
+  },
+  {
+    id: 'multi-ai-admin-checklist',
+    title: 'AI admin settings to verify',
+    tool: 'Multi-Tool',
+    department: 'Leadership & Strategy',
+    summary: 'A checklist that says VERIFY when a setting is not certain.',
+    prompt: `We are writing an admin checklist for these approved AI plans: [LIST PLANS].
+
+For each plan, list only the settings an admin should verify: who can invite users, whether model training is off by default, whether staff feedback can send chats to the vendor, and where extra usage is billed. If you are not sure a setting exists, write VERIFY IN ADMIN rather than describing it.`,
+  },
+  {
+    id: 'multi-staff-data-rule',
+    title: 'Half-page staff data rule',
+    tool: 'Multi-Tool',
+    department: 'Leadership & Strategy',
+    summary: 'A short rule for what can go into an approved AI tool.',
+    prompt: `Turn this into a half-page staff rule.
+
+Approved tools: [LIST]
+Never enter: [LIST]
+Needs a named reviewer before it is sent outside the company: [LIST]
+Who to tell if someone pastes the wrong file: [ROLE]
+
+Plain language, under 200 words. Do not add legal citations.`,
+  },
 ];
 
 export function highlightPlaceholders(text: string): string {

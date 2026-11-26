@@ -6,6 +6,15 @@ import Newsletter from '../components/Newsletter.astro';
 import PromptSwitcher from '../components/PromptSwitcher.astro';
 import { siteConfig } from '../config/site';
 import { prompts } from '../data/prompts';
+import { absoluteUrl } from '../lib/seo';
+
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: siteConfig.name,
+  url: absoluteUrl('/'),
+  description: siteConfig.description,
+};
 
 const guides = (await getCollection('guides')).sort(
   (a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf(),
@@ -13,7 +22,7 @@ const guides = (await getCollection('guides')).sort(
 const featured = guides.filter((g) => g.data.featured).slice(0, 4);
 ---
 
-<BaseLayout>
+<BaseLayout jsonLd={websiteLd}>
   <section class="hero-bg relative overflow-hidden border-b border-line">
     <div class="container-page grid items-center gap-10 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
       <div>
@@ -27,8 +36,8 @@ const featured = guides.filter((g) => g.data.featured).slice(0, 4);
           Step-by-step playbooks and copy-ready prompts for Claude, Grok Bot, and ChatGPT. Written for owners and office teams, with safe-use notes on every guide.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href="/guides" class="btn-primary !px-6 !py-3 !text-base">Start with a guide →</a>
-          <a href="/prompts" class="btn-secondary !px-6 !py-3 !text-base">Open prompt library</a>
+          <a href="/guides/" class="btn-primary !px-6 !py-3 !text-base">Start with a guide →</a>
+          <a href="/prompts/" class="btn-secondary !px-6 !py-3 !text-base">Open prompt library</a>
         </div>
         <dl class="mt-10 grid max-w-xl grid-cols-3 gap-4 text-center sm:text-left">
           <div class="rounded-2xl border border-line bg-card/80 p-4">
@@ -52,7 +61,7 @@ const featured = guides.filter((g) => g.data.featured).slice(0, 4);
           <li><strong class="text-ink">Copyable prompts</strong> with fill-in-the-blank placeholders your team can adapt in minutes.</li>
           <li><strong class="text-ink">Safe-use notes</strong> on every guide so client and company data stay protected.</li>
         </ul>
-        <a href="/tools" class="btn-secondary mt-6 w-full">Compare Claude vs Grok Bot vs ChatGPT</a>
+        <a href="/tools/" class="btn-secondary mt-6 w-full">Compare Claude vs Grok Bot vs ChatGPT</a>
       </div>
     </div>
   </section>
@@ -63,7 +72,7 @@ const featured = guides.filter((g) => g.data.featured).slice(0, 4);
         <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Start by tool</p>
         <h2 class="font-display mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Pick the AI that fits the job</h2>
       </div>
-      <a href="/tools" class="hidden text-sm font-semibold no-underline sm:inline">Full comparison →</a>
+      <a href="/tools/" class="hidden text-sm font-semibold no-underline sm:inline">Full comparison →</a>
     </div>
     <div class="mt-8 grid gap-5 md:grid-cols-3">
       {
@@ -96,7 +105,7 @@ const featured = guides.filter((g) => g.data.featured).slice(0, 4);
           <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Featured playbooks</p>
           <h2 class="font-display mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">Start with these Monday-morning workflows</h2>
         </div>
-        <a href="/guides" class="hidden text-sm font-semibold no-underline sm:inline">All guides →</a>
+        <a href="/guides/" class="hidden text-sm font-semibold no-underline sm:inline">All guides →</a>
       </div>
       <div class="mt-8 grid gap-5 md:grid-cols-2">
         {featured.map((guide) => <GuideCard guide={guide} />)}

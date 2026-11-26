@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GuideCard from '../../components/GuideCard.astro';
 import ToolBadge from '../../components/ToolBadge.astro';
+import { absoluteUrl, isoDate, unescapeHeading } from '../../lib/seo';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides');
@@ -24,7 +25,30 @@ const related = allGuides
   .sort((a, b) => Number(b.data.tool === guide.data.tool) - Number(a.data.tool === guide.data.tool))
   .slice(0, 3);
 
-const toc = headings.filter((h) => h.depth === 2);
+const toc = headings.filter((h) => h.depth === 2).map((heading) => ({
+  ...heading,
+  text: unescapeHeading(heading.text),
+}));
+const canonical = absoluteUrl(`/guides/${guide.id}/`);
+const datePublished = isoDate(guide.data.publishedDate);
+const dateModified = isoDate(guide.data.updatedDate ?? guide.data.publishedDate);
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: guide.data.title,
+  description: guide.data.summary,
+  datePublished,
+  dateModified,
+  author: {
+    '@type': 'Organization',
+    name: 'Office AI Guide',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Office AI Guide',
+  },
+  mainEntityOfPage: canonical,
+};
 const published = guide.data.publishedDate.toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
@@ -33,11 +57,11 @@ const published = guide.data.publishedDate.toLocaleDateString('en-US', {
 });
 ---
 
-<BaseLayout title={guide.data.title} description={guide.data.summary} ogType="article" canonicalPath={`/guides/${guide.id}`}>
+<BaseLayout title={guide.data.title} description={guide.data.summary} ogType="article" canonicalPath={`/guides/${guide.id}/`} jsonLd={articleLd}>
   <article>
     <header class="hero-bg border-b border-line">
       <div class="container-page py-12">
-        <a href="/guides" class="text-sm font-semibold text-accent no-underline">← All guides</a>
+        <a href="/guides/" class="text-sm font-semibold text-accent no-underline">← All guides</a>
         <div class="mt-5 flex flex-wrap items-center gap-2">
           <ToolBadge tool={guide.data.tool} size="md" />
           <span class="rounded-full bg-card px-3 py-1.5 text-xs font-medium uppercase tracking-wide text-ink-muted">

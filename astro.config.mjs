@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // Turns blockquotes that start with **Tip:** or **Watch out:** into styled callouts.
@@ -22,6 +23,15 @@ function rehypeCallouts() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://officeaiguide.com',
+  trailingSlash: 'always',
+  build: {
+    format: 'directory',
+  },
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/404'),
+    }),
+  ],
   markdown: { rehypePlugins: [rehypeCallouts] },
   vite: {
     plugins: [tailwindcss()],

@@ -1,6 +1,12 @@
 ---
 import { siteConfig } from '../config/site';
 const path = Astro.url.pathname;
+
+function isActive(href: string) {
+  const target = href.replace(/\/$/, '') || '/';
+  const current = path.replace(/\/$/, '') || '/';
+  return current === target || current.startsWith(`${target}/`);
+}
 ---
 
 <header class="sticky top-0 z-40 border-b border-line/80 bg-paper/85 backdrop-blur-md">
@@ -21,7 +27,7 @@ const path = Astro.url.pathname;
     <nav class="hidden items-center gap-1 md:flex" aria-label="Primary">
       {
         siteConfig.nav.map((item) => {
-          const active = path === item.href || path.startsWith(`${item.href}/`);
+          const active = isActive(item.href);
           return (
             <a
               href={item.href}
@@ -38,8 +44,34 @@ const path = Astro.url.pathname;
     </nav>
 
     <div class="flex items-center gap-2">
-      <a href="/prompts" class="btn-secondary hidden sm:inline-flex">Prompt library</a>
-      <a href="/guides" class="btn-primary">Browse guides</a>
+      <a href="/prompts/" class="btn-secondary hidden md:inline-flex">Prompt library</a>
+      <a href="/guides/" class="btn-primary hidden md:inline-flex">Browse guides</a>
+
+      <details class="relative md:hidden">
+        <summary
+          class="btn-secondary cursor-pointer list-none marker:content-none [&::-webkit-details-marker]:hidden"
+        >
+          Menu
+        </summary>
+        <nav
+          class="absolute right-0 z-50 mt-2 w-56 rounded-2xl border border-line bg-card p-2 shadow-lg"
+          aria-label="Mobile"
+        >
+          {
+            siteConfig.nav.map((item) => (
+              <a
+                href={item.href}
+                class:list={[
+                  'block rounded-xl px-3 py-2.5 text-sm font-medium no-underline',
+                  isActive(item.href) ? 'bg-paper-2 text-ink' : 'text-ink hover:bg-paper-2',
+                ]}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </details>
     </div>
   </div>
 </header>

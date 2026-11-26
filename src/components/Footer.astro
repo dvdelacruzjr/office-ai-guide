@@ -4,7 +4,7 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="mt-20 border-t border-line bg-paper-2">
-  <div class="container-page grid gap-10 py-12 md:grid-cols-[1.4fr_1fr_1fr]">
+  <div class="container-page grid gap-10 py-12 md:grid-cols-2 lg:grid-cols-4">
     <div>
       <p class="font-display text-2xl font-semibold text-ink">{siteConfig.name}</p>
       <p class="mt-3 max-w-md text-sm leading-relaxed text-ink-muted">{siteConfig.tagline}</p>
@@ -30,11 +30,23 @@ const year = new Date().getFullYear();
       </ul>
     </div>
     <div>
+      <p class="text-sm font-semibold text-ink">About this site</p>
+      <ul class="mt-3 space-y-2 text-sm">
+        {siteConfig.legal.map((item) => (
+          <li>
+            <a href={item.href} class="text-ink-muted no-underline hover:text-accent">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div>
       <p class="text-sm font-semibold text-ink">Use AI safely</p>
       <p class="mt-3 text-sm leading-relaxed text-ink-muted">
         Keep credentials and sensitive personal data out of prompts, check facts before sharing, and use the plans your company has approved.
       </p>
-      <a href="/guides/team-ai-usage-policy" class="mt-3 inline-block text-sm font-semibold">Write a team AI policy →</a>
+      <a href="/guides/team-ai-usage-policy/" class="mt-3 inline-block text-sm font-semibold">Write a team AI policy →</a>
     </div>
   </div>
   <div class="border-t border-line">
